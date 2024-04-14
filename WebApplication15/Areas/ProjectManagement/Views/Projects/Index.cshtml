@@ -1,0 +1,96 @@
+﻿@model List<Project>  //indicates that the view expects a list of Project objects as its model
+
+@{
+
+    ViewData["Title"] = "Projects";
+    //Lab5 - Search Parameters
+    bool searchPerformed = ViewData["SearchPerformed"] as bool? ?? false;
+    string searchString = ViewData["SearchString"] as string;
+
+
+}
+
+<h2>Projects</h2>
+
+@if (Model.Any())   // to determine if there are any projects to display
+
+{
+
+    <table class="table">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Name</th>
+
+                <th>Description</th>
+                
+                 <td>Summary </td>
+              
+                <th> Actions</th>
+
+                <!-- Add other project properties as needed -->
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <!-- A foreach loop is used to iterate over each Project in the model and display its properties in the table rows. -->
+            @foreach (var project in Model)
+
+            {
+
+                <tr>
+                    <td>@project.ProjectId</td>
+                    <td>@Html.DisplayFor(modelItem => project.Name) <!-- Uses ProjectName.cshtml --></td>
+                    <td>@Html.DisplayFor(modelItem => project.Description) <!-- Uses ProjectDescription.cshtml --></td>
+                    <!-- Lab 6 Call to ProjectSummaryViewComponent -->
+                    <!-- I've added a new column for project summaries -->
+                    
+                    <td>
+                        @await Component.InvokeAsync("ProjectSummary", new { projectId = project.ProjectId })
+                    </td>
+                  
+                    <td>
+                        <a asp-action="Details"  asp-route-id="@project.ProjectId" class="btn btn-info">Details</a> <!-- Link to view project details -->
+                        <a asp-action="Delete"  asp-route-id="@project.ProjectId" class="btn btn-danger">Delete</a> <!-- Link to delete a project -->
+                        <!-- Link to view tasks for the project -->
+                        <a asp-controller="Tasks" asp-action="Index" asp-route-projectId="@project.ProjectId" class="btn btn-warning">View Tasks</a>
+
+
+                    </td>
+
+                    <!-- Render other project properties as needed -->
+
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+ 
+
+}
+
+else
+
+{
+
+    if (searchPerformed)
+    {
+        <p>No projects name with name "@searchString".</p>
+    }
+    else
+    {
+        <p> No project available</p>
+    }
+}
+<p>
+    <a class="nav-link text-dark" asp-area="ProjectManagement" asp-controller="Projects" asp-action="Create">Create Project</a>
+</p>

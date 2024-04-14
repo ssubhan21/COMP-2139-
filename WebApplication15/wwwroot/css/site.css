@@ -1,0 +1,66 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Lab 7 */
+/* Home Page Styles */
+.container .row .card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    border: 0;
+}
+
+    .container .row .card .card-body {
+        text-align: center;
+    }
+
+    .container .row .card .card-title {
+        margin-bottom: 15px;
+    }
+
+    .container .row .card .card-text {
+        min-height: 80px;
+    }
+/** End Home Page **/
+
+/** Lab 7 Project/Details.cshtml **/
+.comments-container {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+    .comments-container .comment {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px dashed #ccc;
+    }
+
+        .comments-container .comment:last-child {
+            border-bottom: none;
+        }
+
+#addCommentForm textarea {
+    margin-bottom: 1rem;
+}
+/** End Details Page **/
